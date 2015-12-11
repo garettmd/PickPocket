@@ -30,7 +30,7 @@
 
     <script>
         $(document).ready(function () {
-            var table = $('#article_table').DataTable({
+            dtable = $('#article_table').DataTable({
                 paging: true
 //                select: true
             });
@@ -38,37 +38,13 @@
             $("#article_table tbody").on('click', 'tr', function () {
                 $(this).toggleClass('selected');
             });
+            $('#btn_archive').click(function () {
+                var payload = dtable.rows('.selected').data();
+                $.post('/main/archive', payload, alert("It worked!"))
 
-//            $('#mb1 button').click(function () {
-//                var payload = table.rows('.selected').data();
-//                archive(payload);
+            })
+        })
 
-            function batchedit(operation) {
-                var payload = table.rows('.selected').data();
-                $.post('/main' + operation, payload, alert("It worked!"))
-            }
-        });
-
-
-        //        $('#mb1 button').click(function () {
-        //                var payload = table.rows('.selected').data();
-        //                archive(payload);
-        //            });
-        //
-        //        function archive(load) {
-        //            $.ajax({
-        //                type: 'POST',
-        //                url: '/main',
-        //                data: load,
-        //                success: function(response) {
-        //                    console.log(response);
-        //                },
-        //                error: function(response){
-        //                    console.log(response);
-        //                }
-        //            }
-        //            )
-        //        }
 
     </script>
 </head>
@@ -109,7 +85,7 @@
             </tfoot>
         </table>
         <div class="mb1" id="mb1">
-            <button class="h4 btn btn-primary bg-red" onclick="batchedit(archive)">Archive</button>
+            <button id="btn_archive" class="h4 btn btn-primary bg-red" onclick="batchedit('archive')">Archive</button>
             <button class="h4 btn btn-primary bg-red">Delete</button>
             <button class="h4 btn btn-primary bg-red">Edit Tags</button>
             <button class="h4 btn btn-primary bg-red">Favorite</button>
