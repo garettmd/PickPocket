@@ -1,5 +1,5 @@
 Flask==0.10.1
 Flask-Session==0.2
-requests==2.7.0
+requests==2.30.0
 flask_script
 flask_moment
